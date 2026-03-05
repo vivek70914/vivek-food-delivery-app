@@ -9,34 +9,23 @@ export default function Navbar(){
 
   return(
 
-    <div style={{
-      background:"orange",
-      padding:"15px",
-      color:"white",
-      display:"flex",
-      justifyContent:"space-between",
-      alignItems:"center"
-    }}>
+    <div className="flex justify-between items-center px-6 py-4 bg-orange-500 text-white">
 
-      <h2>🍔 Vivek Food</h2>
+      <h2 className="font-bold text-lg">
+        🍔 Vivek Food
+      </h2>
 
-      <div>
+      <div className="flex gap-6">
 
-        <Link href="/" style={{marginRight:"20px"}}>
-          Home
+        <Link href="/">Home</Link>
+
+        <Link href="/cart">
+          Cart ({cart.length})
         </Link>
 
-        <Link href="/cart" style={{marginRight:"20px"}}>
-          Cart 🛒 ({cart.length})
-        </Link>
+        <Link href="/login">Login</Link>
 
-        <Link href="/login" style={{marginRight:"20px"}}>
-          Login
-        </Link>
-
-        <Link href="/signup">
-          Signup
-        </Link>
+        <Link href="/signup">Signup</Link>
 
       </div>
 

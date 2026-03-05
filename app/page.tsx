@@ -1,104 +1,123 @@
 "use client"
 
+import { useState } from "react"
 import Navbar from "./components/Navbar"
 import RestaurantCard from "./components/RestaurantCard"
+import SearchBar from "./components/SearchBar"
+import LocationSelector from "./components/LocationSelector"
+import { motion } from "framer-motion"
 
-export default function Home() {
+export default function Home(){
+
+  const [search,setSearch] = useState("")
 
   const restaurants = [
+
     {
-      id: 1,
-      name: "Pizza Palace",
-      image: "https://images.unsplash.com/photo-1594007654729-407eedc4be65",
-      rating: "4.5",
-      cuisine: "Pizza, Italian",
-      time: "30 mins"
+      id:1,
+      name:"Pizza Palace",
+      image:"https://images.unsplash.com/photo-1594007654729-407eedc4be65",
+      rating:"4.5",
+      cuisine:"Pizza"
     },
+
     {
-      id: 2,
-      name: "Burger Hub",
-      image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
-      rating: "4.3",
-      cuisine: "Burgers, Fast Food",
-      time: "25 mins"
+      id:2,
+      name:"Burger Hub",
+      image:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
+      rating:"4.3",
+      cuisine:"Burger"
     },
+
     {
-      id: 3,
-      name: "Indian Spice",
-      image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe",
-      rating: "4.7",
-      cuisine: "Indian, Curry",
-      time: "35 mins"
+      id:3,
+      name:"Indian Spice",
+      image:"https://images.unsplash.com/photo-1585937421612-70a008356fbe",
+      rating:"4.7",
+      cuisine:"Indian"
     }
+
   ]
 
-  return (
+  const filteredRestaurants = restaurants.filter((r)=>
+    r.name.toLowerCase().includes(search.toLowerCase())
+  )
 
-    <div>
+  return(
 
-      <Navbar />
+    <div className="bg-black text-white min-h-screen">
 
-      {/* HERO SECTION */}
+      <Navbar/>
 
-      <div style={{
-        padding:"60px",
-        textAlign:"center",
-        background:"#fafafa",
-        fontFamily:"Arial"
-      }}>
+      {/* HERO */}
 
-        <h1 style={{fontSize:"42px"}}>
+      <div className="flex flex-col items-center justify-center h-[60vh] text-center px-6">
+
+        <motion.div
+          animate={{ x:[-300,300,-300] }}
+          transition={{ duration:6, repeat:Infinity }}
+          className="text-7xl"
+        >
+          🛵
+        </motion.div>
+
+        <h1 className="text-5xl font-bold mt-6">
           Order Your Favourite Food 🍔
         </h1>
 
-        <p style={{color:"#666",marginTop:"10px"}}>
+        <p className="text-gray-400 mt-2">
           Delivered fast… because waiting for food is the real tragedy.
         </p>
 
       </div>
 
-      {/* CATEGORY SECTION */}
+      <LocationSelector/>
 
-      <div style={{
-        display:"flex",
-        justifyContent:"center",
-        gap:"40px",
-        padding:"30px",
-        fontSize:"24px"
-      }}>
+      <SearchBar search={search} setSearch={setSearch}/>
 
-        <div>🍕 Pizza</div>
-        <div>🍔 Burger</div>
-        <div>🍜 Chinese</div>
-        <div>🥗 Healthy</div>
-        <div>🍛 Indian</div>
+      {/* CATEGORY */}
+
+      <div className="flex justify-center gap-10 text-center py-10">
+
+        <div>
+          <div className="text-4xl">🍕</div>
+          Pizza
+        </div>
+
+        <div>
+          <div className="text-4xl">🍔</div>
+          Burger
+        </div>
+
+        <div>
+          <div className="text-4xl">🍜</div>
+          Chinese
+        </div>
+
+        <div>
+          <div className="text-4xl">🥗</div>
+          Healthy
+        </div>
 
       </div>
 
       {/* RESTAURANTS */}
 
-      <div style={{
-        padding:"40px",
-        fontFamily:"Arial"
-      }}>
+      <div className="px-10 pb-16">
 
-        <h2 style={{marginBottom:"20px"}}>
+        <h2 className="text-3xl mb-8">
           Popular Restaurants
         </h2>
 
-        <div style={{
-          display:"grid",
-          gridTemplateColumns:"repeat(auto-fit,minmax(250px,1fr))",
-          gap:"20px"
-        }}>
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6">
 
-          {restaurants.map((r)=>(
+          {filteredRestaurants.map((r)=>(
             <RestaurantCard
               key={r.id}
               id={r.id}
               name={r.name}
               image={r.image}
-              rating={`${r.rating} • ${r.time}`}
+              rating={r.rating}
               cuisine={r.cuisine}
             />
           ))}
