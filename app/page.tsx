@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import Navbar from "./components/Navbar"
 import RestaurantCard from "./components/RestaurantCard"
 
@@ -13,7 +12,7 @@ export default function Home() {
       image: "https://images.unsplash.com/photo-1594007654729-407eedc4be65",
       rating: "4.5",
       cuisine: "Pizza, Italian",
-      category: "Pizza"
+      time: "30 mins"
     },
     {
       id: 2,
@@ -21,7 +20,7 @@ export default function Home() {
       image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
       rating: "4.3",
       cuisine: "Burgers, Fast Food",
-      category: "Burger"
+      time: "25 mins"
     },
     {
       id: 3,
@@ -29,40 +28,9 @@ export default function Home() {
       image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe",
       rating: "4.7",
       cuisine: "Indian, Curry",
-      category: "Indian"
-    },
-    {
-      id: 4,
-      name: "Pasta Corner",
-      image: "https://images.unsplash.com/photo-1525755662778-989d0524087e",
-      rating: "4.4",
-      cuisine: "Italian, Pasta",
-      category: "Pasta"
-    },
-    {
-      id: 5,
-      name: "Biryani House",
-      image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398",
-      rating: "4.6",
-      cuisine: "Biryani, Indian",
-      category: "Biryani"
+      time: "35 mins"
     }
   ]
-
-  const [search,setSearch] = useState("")
-  const [category,setCategory] = useState("All")
-
-  const filteredRestaurants = restaurants.filter((r)=>{
-
-    const matchSearch =
-      r.name.toLowerCase().includes(search.toLowerCase())
-
-    const matchCategory =
-      category === "All" || r.category === category
-
-    return matchSearch && matchCategory
-
-  })
 
   return (
 
@@ -70,56 +38,67 @@ export default function Home() {
 
       <Navbar />
 
-      <div style={{padding:"30px",fontFamily:"Arial"}}>
+      {/* HERO SECTION */}
 
-        <h1 style={{marginBottom:"20px"}}>
-          Restaurants
+      <div style={{
+        padding:"60px",
+        textAlign:"center",
+        background:"#fafafa",
+        fontFamily:"Arial"
+      }}>
+
+        <h1 style={{fontSize:"42px"}}>
+          Order Your Favourite Food 🍔
         </h1>
 
-        {/* Category Buttons */}
+        <p style={{color:"#666",marginTop:"10px"}}>
+          Delivered fast… because waiting for food is the real tragedy.
+        </p>
 
-        <div style={{marginBottom:"20px"}}>
+      </div>
 
-          <button onClick={()=>setCategory("All")}>All</button>
-          <button onClick={()=>setCategory("Pizza")}>Pizza</button>
-          <button onClick={()=>setCategory("Burger")}>Burger</button>
-          <button onClick={()=>setCategory("Indian")}>Indian</button>
-          <button onClick={()=>setCategory("Biryani")}>Biryani</button>
+      {/* CATEGORY SECTION */}
 
-        </div>
+      <div style={{
+        display:"flex",
+        justifyContent:"center",
+        gap:"40px",
+        padding:"30px",
+        fontSize:"24px"
+      }}>
 
-        {/* Search */}
+        <div>🍕 Pizza</div>
+        <div>🍔 Burger</div>
+        <div>🍜 Chinese</div>
+        <div>🥗 Healthy</div>
+        <div>🍛 Indian</div>
 
-        <input
-          type="text"
-          placeholder="Search restaurants..."
-          value={search}
-          onChange={(e)=>setSearch(e.target.value)}
-          style={{
-            padding:"10px",
-            width:"100%",
-            maxWidth:"400px",
-            marginBottom:"30px"
-          }}
-        />
+      </div>
 
-        {/* Responsive Grid */}
+      {/* RESTAURANTS */}
 
-        <div
-          style={{
-            display:"grid",
-            gridTemplateColumns:"repeat(auto-fit,minmax(250px,1fr))",
-            gap:"20px"
-          }}
-        >
+      <div style={{
+        padding:"40px",
+        fontFamily:"Arial"
+      }}>
 
-          {filteredRestaurants.map((r)=>(
+        <h2 style={{marginBottom:"20px"}}>
+          Popular Restaurants
+        </h2>
+
+        <div style={{
+          display:"grid",
+          gridTemplateColumns:"repeat(auto-fit,minmax(250px,1fr))",
+          gap:"20px"
+        }}>
+
+          {restaurants.map((r)=>(
             <RestaurantCard
               key={r.id}
               id={r.id}
               name={r.name}
               image={r.image}
-              rating={r.rating}
+              rating={`${r.rating} • ${r.time}`}
               cuisine={r.cuisine}
             />
           ))}

@@ -4,7 +4,7 @@ import { useCart } from "../../context/CartContext"
 
 export default function RestaurantPage() {
 
-  const { cart, addToCart } = useCart()
+  const { cart, addToCart, increaseQty, decreaseQty } = useCart()
 
   const restaurant = {
     name: "Pizza Palace",
@@ -46,6 +46,10 @@ export default function RestaurantPage() {
     0
   )
 
+  function getCartItem(name:string){
+    return cart.find((c:any)=>c.name === name)
+  }
+
   return (
 
     <div style={{fontFamily:"Arial"}}>
@@ -69,62 +73,112 @@ export default function RestaurantPage() {
 
         <p>{restaurant.cuisine}</p>
 
-        <p style={{color:"green"}}>
-          ⭐ {restaurant.rating}
-        </p>
+        <p style={{color:"green"}}>⭐ {restaurant.rating}</p>
 
         <h2 style={{marginTop:"30px"}}>Menu</h2>
 
-        {/* Menu Items */}
+        {foodItems.map((item,index)=>{
 
-        {foodItems.map((item,index)=>(
+          const cartItem = getCartItem(item.name)
 
-          <div
-            key={index}
-            style={{
-              display:"flex",
-              alignItems:"center",
-              justifyContent:"space-between",
-              marginTop:"20px",
-              borderBottom:"1px solid #eee",
-              paddingBottom:"10px"
-            }}
-          >
+          return(
 
-            <div>
+            <div
+              key={index}
+              style={{
+                display:"flex",
+                justifyContent:"space-between",
+                alignItems:"center",
+                marginTop:"20px",
+                borderBottom:"1px solid #eee",
+                paddingBottom:"15px"
+              }}
+            >
 
-              <h3>{item.name}</h3>
+              <div>
 
-              <p>₹ {item.price}</p>
+                <h3>{item.name}</h3>
 
-              <button
-                onClick={()=>addToCart(item)}
+                <p>₹ {item.price}</p>
+
+                {/* Add Button OR Quantity */}
+
+                {!cartItem ? (
+
+                  <button
+                    onClick={()=>addToCart(item)}
+                    style={{
+                      background:"orange",
+                      border:"none",
+                      padding:"8px 15px",
+                      color:"white",
+                      cursor:"pointer",
+                      borderRadius:"5px"
+                    }}
+                  >
+                    Add
+                  </button>
+
+                ) : (
+
+                  <div
+                    style={{
+                      display:"flex",
+                      alignItems:"center",
+                      gap:"10px",
+                      marginTop:"5px"
+                    }}
+                  >
+
+                    <button
+                      onClick={()=>decreaseQty(cart.indexOf(cartItem))}
+                      style={{
+                        background:"orange",
+                        border:"none",
+                        padding:"5px 10px",
+                        color:"white",
+                        borderRadius:"4px"
+                      }}
+                    >
+                      -
+                    </button>
+
+                    <span>{cartItem.quantity}</span>
+
+                    <button
+                      onClick={()=>increaseQty(cart.indexOf(cartItem))}
+                      style={{
+                        background:"orange",
+                        border:"none",
+                        padding:"5px 10px",
+                        color:"white",
+                        borderRadius:"4px"
+                      }}
+                    >
+                      +
+                    </button>
+
+                  </div>
+
+                )}
+
+              </div>
+
+              <img
+                src={item.image}
                 style={{
-                  background:"orange",
-                  border:"none",
-                  padding:"8px",
-                  color:"white",
-                  cursor:"pointer"
+                  width:"110px",
+                  height:"90px",
+                  objectFit:"cover",
+                  borderRadius:"10px"
                 }}
-              >
-                Add to Cart
-              </button>
+              />
 
             </div>
 
-            <img
-              src={item.image}
-              style={{
-                width:"100px",
-                height:"80px",
-                objectFit:"cover",
-                borderRadius:"10px"
-              }}
-            />
+          )
 
-          </div>
-
-        ))}
+        })}
 
         {/* Cart Summary */}
 
