@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 
 type Props = {
@@ -18,58 +20,58 @@ export default function RestaurantCard({
 
   return (
 
-    <Link href={`/restaurant/${id}`} style={{textDecoration:"none",color:"black"}}>
+    <div
+      style={{
+        borderRadius:"12px",
+        overflow:"hidden",
+        background:"#fff",
+        color:"#000",
+        cursor:"pointer"
+      }}
+    >
 
-      <div
+      <img
+        src={image}
         style={{
-          border:"1px solid #eee",
-          borderRadius:"12px",
-          overflow:"hidden",
-          background:"#fff",
-          cursor:"pointer",
-          transition:"0.2s",
-          boxShadow:"0 2px 8px rgba(0,0,0,0.1)"
+          width:"100%",
+          height:"180px",
+          objectFit:"cover"
         }}
-      >
+      />
 
-        <img
-          src={image}
-          style={{
-            width:"100%",
-            height:"180px",
-            objectFit:"cover"
-          }}
-        />
+      <div style={{padding:"12px"}}>
 
-        <div style={{padding:"12px"}}>
+        <h3>{name}</h3>
 
-          <h3 style={{marginBottom:"6px"}}>
-            {name}
-          </h3>
+        <p style={{color:"#666"}}>
+          {cuisine}
+        </p>
 
-          <p style={{color:"#666",fontSize:"14px"}}>
-            {cuisine}
-          </p>
+        <p style={{color:"green"}}>
+          ⭐ {rating}
+        </p>
 
-          <div
+        <Link href={`/restaurant/${id}`}>
+
+          <button
             style={{
-              marginTop:"8px",
-              display:"inline-block",
-              background:"green",
+              marginTop:"10px",
+              background:"orange",
+              border:"none",
+              padding:"8px",
               color:"white",
-              padding:"3px 8px",
-              borderRadius:"5px",
-              fontSize:"12px"
+              cursor:"pointer",
+              borderRadius:"6px"
             }}
           >
-            ⭐ {rating}
-          </div>
+            View Menu
+          </button>
 
-        </div>
+        </Link>
 
       </div>
 
-    </Link>
+    </div>
 
   )
 }
