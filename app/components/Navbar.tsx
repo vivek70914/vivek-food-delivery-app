@@ -11,21 +11,35 @@ export default function Navbar(){
 
     <div className="flex justify-between items-center px-6 py-4 bg-orange-500 text-white">
 
+      {/* Logo */}
+
       <h2 className="font-bold text-lg">
         🍔 Vivek Food
       </h2>
 
+      {/* Navigation Links */}
+
       <div className="flex gap-6">
 
-        <Link href="/">Home</Link>
+        <Link href="/">
+          Home
+        </Link>
 
         <Link href="/cart">
           Cart ({cart.length})
         </Link>
 
-        <Link href="/login">Login</Link>
+        <Link href="/orders">
+          Orders
+        </Link>
 
-        <Link href="/signup">Signup</Link>
+        <Link href="/login">
+          Login
+        </Link>
+
+        <Link href="/signup">
+          Signup
+        </Link>
 
       </div>
 
