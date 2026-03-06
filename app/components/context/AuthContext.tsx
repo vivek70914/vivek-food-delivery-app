@@ -12,17 +12,17 @@ type AuthContextType = {
   logout: () => void
 }
 
-const AuthContext = createContext<AuthContextType | null>(null)
+const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const [user, setUser] = useState<User | null>(null)
 
-  function login(name: string) {
+  const login = (name: string) => {
     setUser({ name })
   }
 
-  function logout() {
+  const logout = () => {
     setUser(null)
   }
 
