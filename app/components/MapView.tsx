@@ -1,36 +1,26 @@
 "use client"
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
-import "leaflet/dist/leaflet.css"
-
 export default function MapView() {
-
-  const position: [number, number] = [22.3072, 73.1812] // Vadodara
 
   return (
 
-    <div style={{marginTop:"30px"}}>
+    <div style={{marginTop:"40px"}}>
 
-      <MapContainer
-        center={position as any}
-        zoom={13}
-        style={{ height: "300px", width: "100%" }}
-      >
+      <h2 style={{marginBottom:"15px"}}>Delivery Area</h2>
 
-        <TileLayer
-          attribution='&copy; OpenStreetMap contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-
-        <Marker position={position}>
-          <Popup>
-            Your Delivery Location
-          </Popup>
-        </Marker>
-
-      </MapContainer>
+      <iframe
+        src="https://maps.google.com/maps?q=Vadodara&t=&z=13&ie=UTF8&iwloc=&output=embed"
+        style={{
+          width:"100%",
+          height:"350px",
+          border:"0",
+          borderRadius:"12px"
+        }}
+        loading="lazy"
+      />
 
     </div>
 
   )
+
 }
