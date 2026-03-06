@@ -25,8 +25,7 @@ export default function RestaurantCard({
         borderRadius:"12px",
         overflow:"hidden",
         background:"#fff",
-        color:"#000",
-        cursor:"pointer"
+        color:"#000"
       }}
     >
 
@@ -43,13 +42,9 @@ export default function RestaurantCard({
 
         <h3>{name}</h3>
 
-        <p style={{color:"#666"}}>
-          {cuisine}
-        </p>
+        <p>{cuisine}</p>
 
-        <p style={{color:"green"}}>
-          ⭐ {rating}
-        </p>
+        <p style={{color:"green"}}>⭐ {rating}</p>
 
         <Link href={`/restaurant/${id}`}>
 
@@ -74,4 +69,5 @@ export default function RestaurantCard({
     </div>
 
   )
+
 }

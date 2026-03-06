@@ -1,16 +1,28 @@
 "use client"
 
-export default function SearchBar({search,setSearch}:{search:string,setSearch:any}){
+type Props = {
+  value: string
+  onChange: (value: string) => void
+}
 
-  return(
+export default function SearchBar({ value, onChange }: Props) {
 
-    <div className="flex justify-center mt-6">
+  return (
+
+    <div style={{marginBottom:"30px"}}>
 
       <input
-        placeholder="Search restaurants or food..."
-        value={search}
-        onChange={(e)=>setSearch(e.target.value)}
-        className="w-[400px] p-3 rounded-lg border text-black"
+        type="text"
+        placeholder="Search restaurants..."
+        value={value}
+        onChange={(e)=>onChange(e.target.value)}
+        style={{
+          width:"100%",
+          padding:"12px",
+          fontSize:"16px",
+          borderRadius:"8px",
+          border:"1px solid #ccc"
+        }}
       />
 
     </div>
