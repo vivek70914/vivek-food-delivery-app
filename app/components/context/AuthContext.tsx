@@ -15,7 +15,6 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-
   const [user, setUser] = useState<User | null>(null)
 
   const login = (name: string) => {
@@ -34,7 +33,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 }
 
 export function useAuth() {
-
   const context = useContext(AuthContext)
 
   if (!context) {
